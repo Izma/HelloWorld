@@ -1,0 +1,25 @@
+﻿@model HelloWorld.Models.Person
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<ul class="list-group">
+    <li class="list-group-item">Name: @Model.Name @Model.LastName</li>
+    <li class="list-group-item">Genre: @Model.Genre</li>
+    <li class="list-group-item">Age: <span class="badge badge-info">@Model.Age</span></li>
+    <li class="list-group-item">Opinion: @Model.Opinion</li>
+</ul>
+
+
+<a href="#">Back to list</a> |
+@if (ViewBag.isDelete)
+{
+    @Html.ActionLink(
+    "Delete",
+    "Delete",
+    new { personID = ViewBag.personId },
+    new { onclick = "return confirm('Are you sure you wish to delete this article?');" });
+}

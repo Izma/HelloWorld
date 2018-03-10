@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<button id="new-register" class="btn btn-secondary">New register</button>
+<div id="persons" class="mt-2">
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Last name</th>
+                <th>Age</th>
+                <th>Opinion</th>
+                <th>Genre</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="person in persons">
+                <td>{{person.Name}}</td>
+                <td>{{person.LastName}}</td>
+                <td class="text-center"><span class="badge badge-info">{{person.Age}}</span></td>
+                <td>{{person.Opinion}}</td>
+                <td>{{person.Genre}}</td>
+                <td class="text-center">
+                    <a href="#" class="btn btn-success btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                    <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+<div class="modal fade" id="modal-new-register" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="form">
+                <form v-on:submit.prevent="$validator.validateAll();onSubmit()">
+                    <div class="modal-header">
+                        <h5 class="modal-title">New person</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group" v-bind:class="{'has-danger': errors.has('name')}">
+                            <label class="fom-control-label">Name</label>
+                            <div class="control">
+                                <input name="name" v-model="form.name" v-validate="'required|min:3'" class="form-control" v-bind:class="{'form-control-danger': errors.has('name')}" type="text" placeholder="Name">
+                            </div>
+                            <div class="form-control-feedback" v-show="errors.has('name')">
+                                {{ errors.first('name') }}
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Lastname</label>
+                            <div class="control">
+                                <input name="lastName" v-model="form.lastName" v-validate="'required'" v-bind:class="{'is-danger': errors.has('lastName')}" class="form-control" type="text" placeholder="Lastname">
+                            </div>
+                            <p class="help is-danger" v-show="errors.has('lastName')">
+                                {{ errors.first('lastName') }}
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Age</label>
+                            <div class="control">
+                                <div class="select">
+                                    <input name="name" v-model="form.age" v-bind:class="{'is-danger': errors.has('name')}" class="form-control" type="number" placeholder="Age">
+                                </div>
+                                <p class="help is-danger" v-show="errors.has('lastName')">
+                                    {{ errors.first('age') }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Opinion</label>
+                            <div class="control">
+                                <textarea v-model="form.opinion" v-bind:class="{'is-danger': errors.has('name')}" class="form-control" placeholder="Opinion"></textarea>
+                            </div>
+                            <p class="help is-danger" v-show="errors.has('lastName')">
+                                {{ errors.first('opinion') }}
+                            </p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="label">Genre</label>
+                            <select v-model="form.genre" class="form-control">
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                            </select>
+                            <p class="help is-danger" v-show="errors.has('lastName')">
+                                {{ errors.first('genre') }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" v-bind:disabled="errors.any()" class="btn btn-primary"><i class="fa fa-save" aria-hidden="true"></i>Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+                {{message}}
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="@Url.Content("~/Scripts/vuejs/home.js")"></script>
+}
