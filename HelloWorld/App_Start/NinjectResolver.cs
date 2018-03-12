@@ -29,7 +29,8 @@ namespace HelloWorld
 
         private void AddBindings()
         {
-            this._kernel.Bind<IPerson>().To<PersonRepository>().WithConstructorArgument("connectionString", Connection.ConnectionString); // Registering Types    
+            this._kernel.Bind<IConnectionFactory>().To<SqlConnectionFactory>().WithConstructorArgument("connectionString", Connection.ConnectionString);
+            this._kernel.Bind<IPerson>().To<PersonRepository>(); 
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HelloWorld.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -10,21 +11,21 @@ namespace HelloWorld.Repositories
 {
     public abstract class BaseRepository
     {
-        private readonly string _connectionString;
+        private readonly IConnectionFactory _connectionFactory;
 
-        public BaseRepository(string connectionString)
+        public BaseRepository(IConnectionFactory connection)
         {
-            _connectionString = connectionString;
+            _connectionFactory = connection;
         }
 
         protected async Task<T> WithConnection<T>(Func<IDbConnection, Task<T>> getData)
         {
             try
             {
-                using (var connection = new SqlConnection(_connectionString))
+                using (var connection = _connectionFactory.CreateConnection())
                 {
-                    await connection.OpenAsync(); 
-                    return await getData(connection); 
+                    await connection.OpenAsync();
+                    return await getData(connection);
                 }
             }
             catch (TimeoutException ex)

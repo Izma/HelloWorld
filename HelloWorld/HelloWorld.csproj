@@ -162,6 +162,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Connection.cs" />
+    <Compile Include="Helpers\SqlConnectionFactory.cs" />
+    <Compile Include="Interfaces\IConnectionFactory.cs" />
     <Compile Include="Interfaces\IPerson.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

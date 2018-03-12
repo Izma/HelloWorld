@@ -10,7 +10,7 @@ namespace HelloWorld.Repositories
 {
     public class PersonRepository : BaseRepository, IPerson
     {
-        public PersonRepository(string connectionString) : base(connectionString)
+        public PersonRepository(IConnectionFactory connectionFactory) : base(connectionFactory)
         {
         }
 
