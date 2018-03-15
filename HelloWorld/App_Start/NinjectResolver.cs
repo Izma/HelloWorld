@@ -10,27 +10,27 @@ namespace HelloWorld
 {
     public class NinjectResolver : IDependencyResolver
     {
-        private readonly IKernel _kernel;
+        private readonly IKernel kernel;
 
         public NinjectResolver()
         {
-            _kernel = new StandardKernel();
+            kernel = new StandardKernel();
             AddBindings();
         }
         public object GetService(Type serviceType)
         {
-            return _kernel.TryGet(serviceType);
+            return kernel.TryGet(serviceType);
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            return _kernel.GetAll(serviceType);
+            return kernel.GetAll(serviceType);
         }
 
         private void AddBindings()
         {
-            this._kernel.Bind<IConnectionFactory>().To<SqlConnectionFactory>().WithConstructorArgument("connectionString", Connection.ConnectionString);
-            this._kernel.Bind<IPerson>().To<PersonRepository>(); 
+            this.kernel.Bind<IConnectionFactory>().To<SqlConnectionFactory>().WithConstructorArgument("connectionString", Connection.ConnectionString);
+            this.kernel.Bind<IPerson>().To<PersonRepository>(); 
         }
     }
 }

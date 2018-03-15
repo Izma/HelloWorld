@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using FluentValidation.Attributes;
+using HelloWorld.Models.Validators;
 
 namespace HelloWorld.Models
 {
+    [Validator(typeof(PersonValidator))]
     public class Person
     {
         public int PersonID { get; set; }

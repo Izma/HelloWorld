@@ -28,6 +28,7 @@ namespace HelloWorld
                 "~/Scripts/vue-resource.js"));
 
             bundles.Add(new StyleBundle("~/Content/font").Include(
+                "~/Content/poppins-font.css",
                 "~/Content/questrial-font.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
